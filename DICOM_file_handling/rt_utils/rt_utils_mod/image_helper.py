@@ -8,7 +8,7 @@ from pydicom import dcmread
 from pydicom.dataset import Dataset
 from pydicom.sequence import Sequence
 
-from rt_utils.utils import ROIData, SOPClassUID
+from .utils import ROIData, SOPClassUID
 
 
 def load_sorted_image_series(dicom_series_path: str):
@@ -280,7 +280,7 @@ def get_slice_mask_from_slice_contour_data(
 
     for i, p in enumerate(polygons):
         if p is None or len(p) < 3:
-            print(f"[!] Collapsed polygon — skipped")
+            #print(f"[!] Collapsed polygon — skipped")
             continue
         cv.fillPoly(slice_mask, [p], 1)
         

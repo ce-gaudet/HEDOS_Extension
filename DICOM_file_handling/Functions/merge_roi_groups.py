@@ -1,4 +1,4 @@
-from HEDOS2.DICOM_file_handling.rt_utils.rt_utils_mod import RTStructBuilder
+from DICOM_file_handling.rt_utils.rt_utils_mod import RTStructBuilder
 import numpy as np
 import os
 

@@ -1,6 +1,6 @@
 import os
-from HEDOS2.DICOM_file_handling.Functions import dicom_conversion
-from HEDOS2.DICOM_file_handling.Functions.merge_roi_groups import merge_rtstruct
+from DICOM_file_handling.Functions import dicom_conversion
+from DICOM_file_handling.Functions.merge_roi_groups import merge_rtstruct
 from organs import GROUPS
 
 # Pipeline Step 2: plan selection and NumPy conversion
@@ -21,16 +21,21 @@ if __name__ == "__main__":
 
     # Step 2.1: specify the plan DICOM paths (CT, RTSTRUCT, RTDOSE)
 
-    ####### MUHC #########
-    RTDOSE = "/Users/charles-etiennegaudet/Downloads/MUHC/RD_muhc.dcm"
-    CT = "/Users/charles-etiennegaudet/Downloads/MUHC/MUHC_CT-2"
-    RTSTRUCT = "/Users/charles-etiennegaudet/Downloads/MUHC/RS_muhc.dcm"
+    version = input("please enter 'initial' or 'optimized':")
 
-    ####### LymphoTEC #########
-    #RTDOSE = "/Users/charles-etiennegaudet/Downloads/Lymphotec/RD_lymphotec.dcm"
-    #CT = "/Users/charles-etiennegaudet/Downloads/Lymphotec"
-    #RTSTRUCT = "/Users/charles-etiennegaudet/Downloads/Lymphotec/RS_lymphotec.dcm"
-
+    if version == "initial":
+        ####### MUHC #########
+        RTDOSE = "/Users/charles-etiennegaudet/Downloads/MUHC/RD_muhc.dcm"
+        CT = "/Users/charles-etiennegaudet/Downloads/MUHC/MUHC_CT-2"
+        RTSTRUCT = "/Users/charles-etiennegaudet/Downloads/MUHC/RS_muhc.dcm"
+    elif version == "optimized":
+        ####### Lymphotec #########
+        RTDOSE = "/Users/charles-etiennegaudet/Downloads/Lymphotec/RD_lymphotec.dcm"
+        CT = "/Users/charles-etiennegaudet/Downloads/Lymphotec"
+        RTSTRUCT = "/Users/charles-etiennegaudet/Downloads/Lymphotec/RS_lymphotec.dcm"
+    else:
+        raise ValueError("please enter 'initial' or 'optimized':")
+    print("Loading plan...")
     # Step 2.2: group structures by merging ROIs (masks) inside the RTSTRUCT (GROUPS in organs.py)
     groups = GROUPS
     grouped_rtstruct_location = os.path.join(os.path.dirname(RTSTRUCT), "segmentations_grouped.dcm")

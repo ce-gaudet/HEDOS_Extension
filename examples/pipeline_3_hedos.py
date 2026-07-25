@@ -3,7 +3,7 @@ plt.use("QtAgg") #required for sliding window (interactive figure)
 import numpy as np
 import os
 from workflows import BloodDoseFromFields
-from HEDOS2.DICOM_file_handling.Functions.simulation_classes import (
+from DICOM_file_handling.Functions.simulation_classes import (
     Patient_parameters,
     Treatment_parameters,
     Simulation_parameters)

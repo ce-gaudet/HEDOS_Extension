@@ -1,10 +1,19 @@
-# macOS
-.DS_Store
-
 # Python
 __pycache__/
 *.py[cod]
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
 .venv/
+venv/
+
+# macOS
+.DS_Store
 
 # PyCharm
 .idea/
+
+# Patient data / large arrays
+input/patient/*.npy

@@ -1,5 +1,5 @@
-from HEDOS2.DICOM_file_handling.Functions.merge_rtstruct_files import merge_rtstruct_files
-from HEDOS2.DICOM_file_handling.Functions.total_segmentator import run_totalseg
+from DICOM_file_handling.Functions.merge_rtstruct_files import merge_rtstruct_files
+from DICOM_file_handling.Functions.total_segmentator import run_totalseg
 from organs import ORG_SYSTEMS
 
 # Pipeline Step 1: CT segmentation and merging of RTSTRUCT files
