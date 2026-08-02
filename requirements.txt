@@ -32,3 +32,4 @@ torch
 TotalSegmentator
 PyQt5
 dicompyler-core==0.5.6
+git+https://github.com/ce-gaudet/HEDOS_2.0.git
