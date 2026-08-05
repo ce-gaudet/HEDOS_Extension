@@ -9,6 +9,20 @@ from dicom.simulation_parameters import (
     Simulation_parameters,
 )
 
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+PATIENT_DIR = os.path.join(
+    ROOT,
+    "input",
+    "patient"
+)
+
+BLOOD_PATH = os.path.join(
+    ROOT,
+    "input",
+    "blood_path.npy"
+)
+
 
 def run_hedos(
     plan_name,
@@ -71,12 +85,15 @@ def run_hedos(
             f"HEDOS {plan_name}: run {run_idx + 1}/{n_runs}"
         )
 
-
         blood_dose_array = (
             BloodDoseFromFields.blood_dose_distribution(
                 simulation_parameters,
                 patient_parameters,
                 treatment_parameters,
+                PATIENT_DIR,
+                BLOOD_PATH,
+                plan_name,
+                run_idx + 1,
             )
         )
 

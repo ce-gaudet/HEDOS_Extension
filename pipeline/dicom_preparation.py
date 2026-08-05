@@ -118,17 +118,19 @@ DICOM TO HEDOS VOXEL CONVERSION
     )
 
 
-
-    dicom_conversion(
-
-        CT_FOLDER,
-
-        grouped_rtstruct,
-
-        RTDOSE
-
+    output_dir = os.path.join(
+        os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+        "input",
+        "patient",
     )
 
+
+    dicom_conversion(
+        CT_FOLDER,
+        grouped_rtstruct,
+        RTDOSE,
+        output_dir=output_dir,
+    )
 
 
     print(

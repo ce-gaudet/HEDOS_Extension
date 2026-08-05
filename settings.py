@@ -18,8 +18,8 @@ After editing this file, run:
 PATIENT = {
 
     # DICOM inputs
-    "ct": "/Users/charles-etiennegaudet/Documents/Screenshots/MUHC/MUHC_CT-2",
-    "rtstruct": "/Users/charles-etiennegaudet/Documents/Screenshots/MUHC/RS_muhc.dcm",
+    "ct": "/Users/charles-etiennegaudet/Downloads/35m_CT",
+    "rtstruct": "/Users/charles-etiennegaudet/Downloads/RS_35m.dcm",
 
     # Patient characteristics
     "gender": "M",
@@ -31,6 +31,7 @@ PATIENT = {
     "relative_perfusion": 1.0,
 
     # Organs included in the blood circulation model
+    # Organs included in the blood circulation model
     "organs": [
         "brain",
         "heart",
@@ -38,27 +39,17 @@ PATIENT = {
         "liver",
         "spleen",
         "kidneys",
-        "large_veins",
-        "tumor",
         "red_marrow",
         "oesophagus",
-        "aorta",
-        "inferior_vena_cava",
-        "stomach",
+        "stomach_oesophagus",
+        "small_intestine",
+        "large_intestine",
+        "bladder",
         "pancreas",
+        "adrenals",
+        "thyroid",
+        "tumor",
     ],
-}
-
-# ============================================================
-# TREATMENT PLANS
-# ============================================================
-
-PLANS = {
-
-    "INITIAL": "/Users/charles-etiennegaudet/Documents/Screenshots/MUHC/RD_muhc.dcm",
-
-    "OPTIMIZED": "/Users/charles-etiennegaudet/Documents/Screenshots/MUHC/RD_lymphotec.dcm",
-
 }
 
 # ============================================================
@@ -68,7 +59,7 @@ PLANS = {
 SIMULATION = {
 
     # Monte Carlo
-    "n_runs": 2,
+    "n_runs": 1, #Use 1 for run_analysis, and use 2+ for run_comparison to assess variability
     "sample_size": 2000,
 
     # Time discretization
