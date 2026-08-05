@@ -3,7 +3,9 @@ from pipeline.hedos_pipeline import run_hedos
 from utils.validation import validate_inputs
 from settings import PATIENT, SIMULATION
 import os
+
 RTDOSE = "/Users/charles-etiennegaudet/Downloads/RD_35m_MUHC.dcm"
+
 RD_name = os.path.splitext(os.path.basename(RTDOSE))[0]
 
 def run_pipeline(PATIENT, RTDOSE, SIMULATION):

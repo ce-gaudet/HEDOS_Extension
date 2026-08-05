@@ -1,65 +1,52 @@
-# HEDOS Studio
+# HEDOS Extension
 
-HEDOS Studio is a frontend workflow for HEDOS 2.0 that prepares patient DICOM data and runs blood dose simulations.
+HEDOS Extension contains the code developed to extend the original HEDOS workflow. It automates patient preparation from DICOM (CT, RTSTRUCT, RTDOSE), groups DICOM handling functions into a single workflow, and provides workflows for single-plan and multi-plan blood dose simulations.
 
-## Features
+## Usage
 
-- RTSTRUCT preprocessing
-- Automatic organ grouping
-- DICOM → HEDOS conversion
-- Blood dose simulation
-- Multi-plan comparison
+Simulation and patient parameters are configured in:
 
-## Requirements
-
-- Python 3.10+
-- HEDOS 2.0 installed (`pip install -e .`)
-- CT DICOM series
-- RTSTRUCT
-- RTDOSE
-
-## Project structure
-
-```
-input/
-    patient/
-    phantom/
-
-results/
-
-run_analysis.py
-settings.py
-organs.py
-patient_preparation.py
-hedos_pipeline.py
-```
-
-## Configuration
-
-Edit only:
-
-```
+```text
 settings.py
 ```
 
-Specify:
+Utility functions are located in:
 
-- CT folder
-- RTSTRUCT
-- RTDOSE
-- Patient parameters
-- Simulation parameters
+```text
+utils/
+```
 
-## Run
+including `organs.py`, which defines the mapping used to merge clinical organ and substructure names from the RTSTRUCT into the organ names expected by HEDOS.
+
+Two execution scripts are provided:
+
+- `run_single.py` – for a single RTDOSE plan.
+- `run_comparison.py` – for comparing multiple RTDOSE plans.
+
+For both scripts, the only required modification is the RTDOSE file path(s). Once updated, simply execute:
 
 ```bash
-python run_analysis.py
+python run_single.py
 ```
+
+or
+
+```bash
+python run_comparison.py
+```
+
+Most figures are automatically saved instead of displayed. The only interactive visualization retained is the 3D slice viewer.
 
 ## Output
 
-Results are written to
+Results are written to:
 
+```text
+results/
 ```
-results/blood_dose/
+
+Temporary HEDOS input files generated during DICOM conversion are written to:
+
+```text
+input/patient/
 ```

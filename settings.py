@@ -31,7 +31,6 @@ PATIENT = {
     "relative_perfusion": 1.0,
 
     # Organs included in the blood circulation model
-    # Organs included in the blood circulation model
     "organs": [
         "brain",
         "heart",
