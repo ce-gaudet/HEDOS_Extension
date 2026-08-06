@@ -42,18 +42,9 @@ def load_dose_image(rtdose_path: str) -> sitk.Image:
 
     dose_image.SetSpacing((py, px, z_spacing))
 
+
     if hasattr(dose_ds, "ImagePositionPatient"):
         dose_image.SetOrigin(tuple(float(v) for v in dose_ds.ImagePositionPatient))
-
-    if hasattr(dose_ds, "ImageOrientationPatient"):
-        iop = [float(v) for v in dose_ds.ImageOrientationPatient]
-        row = np.array(iop[:3])
-        col = np.array(iop[3:])
-        normal = np.cross(row, col)
-        direction = np.vstack([row, col, normal]).T
-        dose_image.SetDirection(tuple(direction.flatten()))
-    else:
-        dose_image.SetDirection((1,0,0,0,1,0,0,0,1))
 
     return dose_image
 
@@ -82,7 +73,6 @@ def extract_structures(rtstruct_path: str, ct_series_dir: str, ct_image: sitk.Im
         if mask_np is None or mask_np.sum() == 0:
             continue
 
-        mask_np = np.swapaxes(mask_np, 2, 3)
         mask_img = sitk.GetImageFromArray(mask_np.astype(np.uint8))
         mask_img.SetSpacing(ct_image.GetSpacing())
         mask_img.SetOrigin(ct_image.GetOrigin())
@@ -93,35 +83,32 @@ def extract_structures(rtstruct_path: str, ct_series_dir: str, ct_image: sitk.Im
     return structure_masks
 
 
-def save_hedos_inputs(ct_image: sitk.Image, structure_masks: dict, dose_image: sitk.Image, output_dir: str) -> None:
+def save_hedos_inputs(ct_image, structure_masks, dose_image, output_dir):
     os.makedirs(output_dir, exist_ok=True)
 
     affine = np.eye(4, dtype=np.float64)
     spacing = np.array(ct_image.GetSpacing())
-    direction = np.array(ct_image.GetDirection()).reshape(3,3)
+    direction = np.array(ct_image.GetDirection()).reshape(3, 3)
     origin = np.array(ct_image.GetOrigin())
 
-    affine[:3,:3] = direction @ np.diag(spacing)
-    affine[:3,3] = origin
+    affine[:3, :3] = direction @ np.diag(spacing)
+    affine[:3, 3] = origin
 
     dose_array = sitk.GetArrayFromImage(dose_image).astype(np.float32)
+    dose_array = np.transpose(dose_array, (1, 2, 0)) #Fixing SITK convention
+    #dose_array = np.transpose(dose_array, (2, 1, 0))
+
 
     seg_arrays = {
         organ: sitk.GetArrayFromImage(mask).astype(np.uint8)
         for organ, mask in structure_masks.items()
     }
 
-    print("DOSE SHAPE:", dose_array.shape)
-
-    for name, seg in seg_arrays.items():
-        print("SEG SHAPE:", name, seg.shape)
-        break
-
-    np.save(os.path.join(output_dir,"dose.npy"), dose_array)
-    np.save(os.path.join(output_dir,"affine.npy"), affine)
+    np.save(os.path.join(output_dir, "dose.npy"), dose_array)
+    np.save(os.path.join(output_dir, "affine.npy"), affine)
 
     np.savez_compressed(
-        os.path.join(output_dir,"compressed_segs.npz"),
+        os.path.join(output_dir, "compressed_segs.npz"),
         **seg_arrays
     )
 

@@ -18,8 +18,8 @@ After editing this file, run:
 PATIENT = {
 
     # DICOM inputs
-    "ct": "/Users/charles-etiennegaudet/Downloads/35m_CT",
-    "rtstruct": "/Users/charles-etiennegaudet/Downloads/RS_35m.dcm",
+    "ct": "/Users/charles-etiennegaudet/Documents/HEDOS_Data/CE_CT/CT_Lymphotec_plan",
+    "rtstruct": "/Users/charles-etiennegaudet/Documents/HEDOS_Data/CE_CT/RS_lymphotec.dcm",
 
     # Patient characteristics
     "gender": "M",

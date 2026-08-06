@@ -4,7 +4,7 @@ from utils.validation import validate_inputs
 from settings import PATIENT, SIMULATION
 import os
 
-RTDOSE = "/Users/charles-etiennegaudet/Downloads/RD_35m_MUHC.dcm"
+RTDOSE = "/Users/charles-etiennegaudet/Documents/HEDOS_Data/CE_CT/RD_lymphotec.dcm"
 
 RD_name = os.path.splitext(os.path.basename(RTDOSE))[0]
 
