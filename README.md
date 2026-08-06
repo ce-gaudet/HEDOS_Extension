@@ -16,7 +16,7 @@ Utility functions are located in:
 utils/
 ```
 
-including `organs.py`, which defines the mapping used to merge clinical organ and substructure names from the RTSTRUCT into the organ names expected by HEDOS.
+The file `utils/organs.py` contains the `ORGAN_RECIPES` dictionary, which maps the organ names found in the RTSTRUCT to the standard organ names expected by HEDOS. Since ROI names vary between institutions and treatment planning systems, this dictionary may need to be updated when processing data from a new source.
 
 Two execution scripts are provided:
 
