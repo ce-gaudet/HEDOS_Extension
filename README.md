@@ -56,4 +56,4 @@ input/patient/
 HEDOS Extension uses the HEDOS blood dose calculation framework developed by MGH Radiation Oncology.
 
 HEDOS repository:
-[PUT THE LAB HEDOS REPOSITORY LINK HERE]
+https://github.com/kildealab/HEDOS
