@@ -50,3 +50,10 @@ Temporary HEDOS input files generated during DICOM conversion are written to:
 ```text
 input/patient/
 ```
+
+## Acknowledgements
+
+HEDOS Extension uses the HEDOS blood dose calculation framework developed by MGH Radiation Oncology.
+
+HEDOS repository:
+[PUT THE LAB HEDOS REPOSITORY LINK HERE]
